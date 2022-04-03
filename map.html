@@ -1,22 +1,41 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Custom Popups</title>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <!-- jsFiddle will insert css and js -->
-    <link rel="stylesheet" href="./syle.css">
-  </head>
-  <body>
-    <div id="map"></div>
-    <div id="content">
-        <button id='button'>hello</button>
-    </div>
 
-    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly&channel=2"
-      async
-    ></script>
-    <script src="./index.js"></script>
-  </body>
+<head>
+  <title>Custom Popups</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <!-- jsFiddle will insert css and js -->
+  
+  <!-- <link rel="stylesheet" href="./syle.css"> -->
+  <script>
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "firebase/app";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyC591XW57Vt9aKMWCr_9jiKSFimg1YcCSs",
+      authDomain: "race-system.firebaseapp.com",
+      projectId: "race-system",
+      storageBucket: "race-system.appspot.com",
+      messagingSenderId: "848259859409",
+      appId: "1:848259859409:web:2cf1c7ded6e1777521d6f0"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+  </script>
+</head>
+
+<body>
+  <!-- <div id="map"></div> -->
+
+  <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+  <!-- <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly&channel=2"
+    async></script>
+  <script src="./index.js"></script> -->
+</body>
+
 </html>

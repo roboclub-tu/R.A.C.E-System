@@ -1,93 +1,67 @@
-let map, popup, Popup;
-const labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-let labelIndex = 0;
+let map, popup, currentLngLat, currentMap, currentPopup, currentMarker;
+let markers = [];
+let isPopup = false;
 
-document.getElementById("button").onclick = function () {
-  location.href = "https://developers.google.com/maps/documentation/javascript/examples/overlay-popup";
-};
-/** Initializes the map and the custom popup. */
+//Create button
+const reportBtn = document.createElement("button");
+reportBtn.textContent = "report";
+
+const removeBtn = document.createElement("button");
+removeBtn.textContent = "remove";
+
 function initMap() {
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: -33.9, lng: 151.1 },
-    zoom: 10,
-
+  const initPosition = { lat: 42.012430, lng: 23.095636 };
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 12,
+    center: initPosition,
   });
+
   // This event listener calls addMarker() when the map is clicked.
   google.maps.event.addListener(map, "click", (event) => {
-    addMarker(event.latLng, map);
-  });
-  // Add a marker at the center of the map.
-  addMarker(bangalore, map);
-  /**
-   * A customized popup on the map.
-   */
-  class Popup extends google.maps.OverlayView {
-    position;
-    containerDiv;
-    constructor(position, content) {
-      super();
-      this.position = position;
-      content.classList.add("popup-bubble");
+    currentLngLat = event.latLng.toJSON();
+    currentMap = map;
 
-      // This zero-height div is positioned at the bottom of the bubble.
-      const bubbleAnchor = document.createElement("div");
-
-      bubbleAnchor.classList.add("popup-bubble-anchor");
-      bubbleAnchor.appendChild(content);
-      // This zero-height div is positioned at the bottom of the tip.
-      this.containerDiv = document.createElement("div");
-      this.containerDiv.classList.add("popup-container");
-      this.containerDiv.appendChild(bubbleAnchor);
-      // Optionally stop clicks, etc., from bubbling up to the map.
-      Popup.preventMapHitsAndGesturesFrom(this.containerDiv);
+    if (isPopup) {
+      infoWindow.close();
     }
 
-    /** Called when the popup is added to the map. */
-    onAdd() {
-      this.getPanes().floatPane.appendChild(this.containerDiv);
-    }
-    /** Called when the popup is removed from the map. */
-    onRemove() {
-      if (this.containerDiv.parentElement) {
-        this.containerDiv.parentElement.removeChild(this.containerDiv);
-      }
-    }
-    /** Called each frame when the popup needs to draw itself. */
-    draw() {
-      const divPosition = this.getProjection().fromLatLngToDivPixel(
-        this.position
-      );
-
-      // Hide the popup when it is far out of view.
-      const display =
-        Math.abs(divPosition.x) < 4000 && Math.abs(divPosition.y) < 4000
-          ? "block"
-          : "none";
-
-      if (display === "block") {
-        this.containerDiv.style.left = divPosition.x + "px";
-        this.containerDiv.style.top = divPosition.y + "px";
-      }
-
-      if (this.containerDiv.style.display !== display) {
-        this.containerDiv.style.display = display;
-      }
-    }
-  }
-
-  function addMarker(location, map) {
-    // Add the marker at the clicked location, and add the next-available label
-    // from the array of alphabetical characters.
-    new google.maps.Marker({
-      position: location,
-      label: labels[labelIndex++ % labels.length],
-      map: map,
+    infoWindow = new google.maps.InfoWindow({
+      position: event.latLng,
+      content: reportBtn
     });
+
+    infoWindow.open(map);
+    isPopup = true;
+  });
+
+
+  reportBtn.onclick = function addMarker() {
+    // addMarker(event.latLng.toJSON(), currentMap);
+    const infowindow = new google.maps.InfoWindow({
+      content: removeBtn,
+    });
+
+    //Create marker
+    const marker = new google.maps.Marker({
+      position: currentLngLat,
+      map,
+      id:markers.length+1,
+    });
+    markers.push(marker);
+  
+    marker.addListener("click", () => {
+      infowindow.open({
+        anchor: marker,
+        map,
+      });
+    });
+
+    infoWindow.close();
   }
 
-  popup = new Popup(
-    new google.maps.LatLng(-33.866, 151.196),
-    document.getElementById("content")
-  );
-  popup.setMap(map);
+
+  removeBtn.onclick=function removeMarker(event){
+    console.log(event.id)
+  }
 }
+
