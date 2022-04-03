@@ -1,6 +1,9 @@
 
   body {
-    background-color: #1E0B40;
+    background: url("../assets/background.jpg") no-repeat center;
+    background-size: cover;
+    height: 500px;
+    position: relative;
   }
   
   h1 {

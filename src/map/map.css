@@ -12,6 +12,12 @@
         margin: 0;
         padding: 0;
       }
+      body {
+        background: url("../assets/background.jpg") no-repeat center;
+        background-size: cover;
+        height: 500px;
+        position: relative;
+      }
       
       /* The popup bubble styling. */
       .popup-bubble {
