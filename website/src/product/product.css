@@ -23,7 +23,7 @@
   
   p {
     font-family: georgia;
-    font-size: 18px;
+    font-size: 1.5rem;
     color: #20F95D;
   }
 
@@ -56,4 +56,9 @@
 
   .mapLi{
     border: 2px solid black;
+  }
+  .info{
+    width: 70%;
+    color: #20F95D;
+    padding-left: 1.2rem;
   }
