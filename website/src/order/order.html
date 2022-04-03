@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RACE System</title>
+    <link rel="stylesheet" href="./order.css">
+</head>
+
+<body>
+    <div class="title">
+        <h1>R.A.C.E. System</h1>
+        <h2>Road Alerting Crash Escaping System</h2>
+    </div>
+    <div class="navbar">
+        <ul class="navbarList">
+            <li ><a href="../map/index.html">Map</a></li>
+            <li><a href="../product/product.html">Prodiuct</a></li>
+            <li class="mapLi"><a href="../order/order.html">Order</a></li>
+            <li><a href="../sponsorship/sponsorship.html">Sponsorship</a></li>
+        </ul>
+
+        <form action="https://e3vwdl4bpd.execute-api.us-west-2.amazonaws.com/default/API2SES
+        " method="POST">
+
+            <input type="hidden" name="send_to" value="yankostov1@gmail.com">
+
+            <fieldset>
+                <legend>Order information</legend>
+
+                <label for="name">Your name </label>
+                <input type="text" id="name" name="name">
+
+                <label for="phone">Phone number</label>
+                <input type="tel" id="phone" name="phone" placeholder="phone number">
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email">
+
+                <label for="address">Address</label>
+                <input type="address" id="address" name="address">
+            </fieldset>
+            <button type="submit">Order </button>
+        </form>
+
+
+        <script src="./order.js"></script>
+</body>
+
+</html>
